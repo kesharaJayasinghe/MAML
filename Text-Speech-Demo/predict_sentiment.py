@@ -22,3 +22,13 @@ def azureml_main(dataset, stop_words);
     tweets = list(map(str.lower, tweets))
     
     # Stem the tweet text
+    porter_stemmer = PorterStemmer()
+    temp = [tweet.split() for tweet in tweets]      # Split tweets into tokens
+    tweets = list(map(lambda t: ' '.join([porter_stemmer.stem(word) for word in t.split()]), tweets))
+    
+    # Remove stop words
+    stop_words = [w for w in stop_words.words if w in stop_words.words.unique()]
+    tweets = list(map(lambda t: ' '.join([word for word in t.split() if word not in set(stop_words)]), tweets))
+    
+    
+    
