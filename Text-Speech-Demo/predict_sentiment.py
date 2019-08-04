@@ -30,5 +30,5 @@ def azureml_main(dataset, stop_words);
     stop_words = [w for w in stop_words.words if w in stop_words.words.unique()]
     tweets = list(map(lambda t: ' '.join([word for word in t.split() if word not in set(stop_words)]), tweets))
     
-    
-    
+    dataset['tweets'] = tweets
+    return dataset
